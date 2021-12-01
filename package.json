@@ -9,7 +9,9 @@
     "autoprefixer": "^10.4.0",
     "nuxt3": "^3.0.0-27306170.bd36e13",
     "postcss": "^8.4.4",
+    "sass": "^1.44.0",
     "tailwind-config-viewer": "^1.6.2",
     "tailwindcss": "^2.2.19"
-  }
+  },
+  "dependencies": {}
 }

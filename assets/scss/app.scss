@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
     h1 {
         @apply mt-2 text-3xl sm:text-4xl leading-8 font-extrabold tracking-tight;
