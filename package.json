@@ -13,5 +13,7 @@
     "tailwind-config-viewer": "^1.6.2",
     "tailwindcss": "^2.2.19"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@tailwindcss/forms": "^0.3.4"
+  }
 }
