@@ -47,37 +47,28 @@
   </NuxtLayout>
 </template>
 
-<script>
+
+<script lang="ts">
 export default {
   layout: false,
 };
 </script>
 
-<script setup>
-  // const { data:spots } = await useFetch('/api/spots')
-  // const spots = await useFetch('/api/spots')
-  // const { data } = await useFetch('/api/spots')
-  const spots = [
-    {
-      id: 1,
-      name: 'la chaume',
-      lng: 2,
-      lat: 3,
-    }
-  ]
+<script setup lang="ts">
+const { data: spots }: { data:any} = await useFetch('/api/spots')
 
-  // const props = {
-  //   spots: Array,
-  // };
-  const methods = {
-    markers() {
-      return this.spots.map(spot => {
-        return {
-          id: spot.id,
-          coordinates: [spot.lat, spot.lng],
-          options: {title: spot.name},
-        };
-      });
-    },
-  };
+// const props = {
+//   spots: Array,
+// };
+// const methods = {
+//   markers() {
+//     return this.spots.map(spot => {
+//       return {
+//         id: spot.id,
+//         coordinates: [spot.lat, spot.lng],
+//         options: {title: spot.name},
+//       };
+//     });
+//   },
+// };
 </script>
