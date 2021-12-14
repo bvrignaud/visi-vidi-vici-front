@@ -38,12 +38,11 @@
         </div>
 
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 mt-5">
-<!--          <Map :markers="markers()" :link-on-marker="true" />-->
+          <Map :markers="markers()" :link-on-marker="true" />
         </div>
 
       </div>
     </div>
-<!--  </app-layout>-->
   </NuxtLayout>
 </template>
 
@@ -57,18 +56,13 @@ export default {
 <script setup lang="ts">
 const { data: spots }: { data:any} = await useFetch('/api/spots')
 
-// const props = {
-//   spots: Array,
-// };
-// const methods = {
-//   markers() {
-//     return this.spots.map(spot => {
-//       return {
-//         id: spot.id,
-//         coordinates: [spot.lat, spot.lng],
-//         options: {title: spot.name},
-//       };
-//     });
-//   },
-// };
+function markers() {
+  return this.spots.map(spot => {
+    return {
+      id: spot.id,
+      coordinates: [spot.lat, spot.lng],
+      options: {title: spot.name},
+    };
+  });
+}
 </script>
