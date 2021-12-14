@@ -1,9 +1,8 @@
 <template>
   <NuxtLayout title="Spots">
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ spot.name }}</h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ data.spot.name }}</h2>
     </template>
-
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 overflow-x-auto">
@@ -12,7 +11,7 @@
             <thead>
             <tr>
               <td></td>
-              <th v-for="(weather, date) in weathers"
+              <th v-for="(weather, date) in data.weathers"
                   :class="{ 'actual-day text-xl rounded-t' : date === today }">
                 {{ (new Date(date)).toLocaleString(undefined, {weekday: "short", month: "numeric", day: "numeric"}) }}
               </th>
@@ -21,28 +20,28 @@
             <tbody>
             <tr>
               <th>airTemperature</th>
-              <td v-for="(weather, date) in weathers" :class="{'actual-day' : date === today}"
+              <td v-for="(weather, date) in data.weathers" :class="{'actual-day' : date === today}"
                   :style="{ color: numberToColor(weather.airTemperature, 0, 40)}">
                 {{ Math.round(weather.airTemperature) }}°
               </td>
             </tr>
             <tr>
               <th>cloudCover</th>
-              <td v-for="(weather, date) in weathers" :class="{'actual-day' : date === today}"
+              <td v-for="(weather, date) in data.weathers" :class="{'actual-day' : date === today}"
                   :style="{ color: numberToColor(weather.cloudCover, 0, 100)}">
                 {{ Math.round(weather.cloudCover) }}%
               </td>
             </tr>
             <tr>
               <th>swellHeight</th>
-              <td v-for="(weather, date) in weathers" :class="{'actual-day' : date === today}"
+              <td v-for="(weather, date) in data.weathers" :class="{'actual-day' : date === today}"
                   :style="{ color: numberToColor(weather.swellHeight, 0, 2)}">
                 {{ weather.swellHeight }}m
               </td>
             </tr>
             <tr>
               <th>windDirection</th>
-              <td v-for="(weather, date) in weathers" :class="{'actual-day' : date === today}"
+              <td v-for="(weather, date) in data.weathers" :class="{'actual-day' : date === today}"
                   :title="`${Math.round(weather.windDirection)}°`">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                      x="0px" y="0px"
@@ -60,15 +59,15 @@
             </tr>
             <tr>
               <th>windSpeed</th>
-              <td v-for="(weather, date) in weathers" :class="{'actual-day' : date === today}"
+              <td v-for="(weather, date) in data.weathers" :class="{'actual-day' : date === today}"
                   :style="{ color: numberToColor(weather.windSpeed * 1.9438, 0, 20)}">
                 {{ Math.round(weather.windSpeed * 1.9438) }}
               </td>
             </tr>
             <tr>
               <th>Marées</th>
-              <td v-for="(weather, date) in weathers" :class="{'actual-day rounded-b' : date === today}">
-                <div v-for="tide in tides">
+              <td v-for="(weather, date) in data.weathers" :class="{'actual-day rounded-b' : date === today}">
+                <div v-for="tide in data.tides">
                   <span v-if="formatDateToYmd(new Date(tide.time)) === formatDateToYmd(new Date(date))">
                       <strong>{{ tide.type === 'low' ? 'basse' : 'haute' }}</strong> :
                       {{ dayjs(tide.time).format('HH[h]mm') }} ({{ tide.height.toFixed(1) }}m)
@@ -94,27 +93,20 @@
   }
 </style>
 
+<script setup lang="ts">
+  import {useFetch} from "#app";
+  import {useRoute} from "vue-router";
+  import dayjs from "dayjs";
+  const route = useRoute();
+  const today = dayjs().format('YYYY-MM-DD');
+  const { data } = await useFetch(`http://127.0.0.1:8000/api/spots/${route.params.id}/forecast`);
+</script>
+
 <script lang="ts">
-import dayjs from "dayjs";
 
 export default {
   layout: false,
-  data() {
-    return {
-      today: dayjs().format('YYYY-MM-DD'),
-      spot: Object,
-      weathers: Object,
-      tides: Array,
-    }
-  },
-  async mounted() {
-    const data = await $fetch(`http://127.0.0.1:8000/api/spots/${this.$route.params.id}/forecast`);
-    this.spot = data.spot
-    this.weathers = data.weathers;
-    this.tides = data.tides;
-  },
   methods: {
-    dayjs: dayjs,
     formatDateToYmd(date) {
       return `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}`;
     },
@@ -134,9 +126,9 @@ export default {
     },
     markers() {
       return [{
-        id: this.spot.id,
-        coordinates: [+this.spot.lat, +this.spot.lng],
-        options: {title: this.spot.name},
+        id: this.data.spot.id,
+        coordinates: [+this.data.spot.lat, +this.data.spot.lng],
+        options: {title: this.data.spot.name},
       }];
     },
   }
