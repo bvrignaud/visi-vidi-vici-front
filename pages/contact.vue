@@ -14,37 +14,35 @@
           <div class="col-span-6 sm:col-span-4">
             <JetstreamLabel for="name" value="Nom" />
             <JetstreamInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
-            <JetstreamInputError :message="form.errors.name" class="mt-2" />
+            <JetstreamInputError :message="errors.name" class="mt-2" />
           </div>
 
           <!-- Email -->
           <div class="col-span-6 sm:col-span-4">
             <JetstreamLabel for="email" value="Email" />
-            <JetstreamInput id="email" type="email" class="mt-1 block w-full"
-                   v-model="form.email" required />
-            <JetstreamInputError :message="form.errors.email" class="mt-2" />
+            <JetstreamInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
+            <JetstreamInputError :message="errors.email" class="mt-2" />
           </div>
 
           <!-- Subject -->
           <div class="col-span-6 sm:col-span-4">
             <JetstreamLabel for="subject" value="Objet" />
             <JetstreamInput id="subject" type="text" class="mt-1 block w-full" v-model="form.subject" />
-            <JetstreamInputError :message="form.errors.subject" class="mt-2" />
+            <JetstreamInputError :message="errors.subject" class="mt-2" />
           </div>
 
           <!-- Message -->
           <div class="col-span-6 sm:col-span-4">
             <JetstreamLabel for="content" value="Message" />
-            <TextArea id="content" class="mt-1 block w-full" v-model="form.content"
-                      required />
-            <JetstreamInputError :message="form.errors.content" class="mt-2" />
+            <TextArea id="content" class="mt-1 block w-full" v-model="form.content" required />
+            <JetstreamInputError :message="errors.content" class="mt-2" />
           </div>
         </template>
         <template #actions>
-          <JetstreamActionMessage :on="form.recentlySuccessful" class="mr-3">
+          <JetstreamActionMessage :on="recentlySuccessful" class="mr-3">
             Envoyé.
           </JetstreamActionMessage>
-          <JetstreamButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+          <JetstreamButton :class="{ 'opacity-25': sending }" :disabled="sending">
             Envoyer
           </JetstreamButton>
         </template>
@@ -53,63 +51,40 @@
   </NuxtLayout>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   layout: false,
 };
 </script>
 
-<script setup>
-// import { defineComponent } from 'vue';
-// import AppLayout from '@/Layouts/AppLayout.vue';
-// import FormSection from "@/Jetstream/FormSection";
-// import Label from "@/Jetstream/Label";
-// import Input from "@/Jetstream/Input";
-// import InputError from "@/Jetstream/InputError";
-// import TextArea from "@/Components/TextArea";
-// import ActionMessage from "@/Jetstream/ActionMessage";
-// import Button from "@/Jetstream/Button";
-//
-// export default defineComponent({
-//   components: {
-//     Button,
-//     ActionMessage,
-//     TextArea,
-//     InputError,
-//     Input,
-//     Label,
-//     FormSection,
-//     AppLayout,
-//   },
-//   data() {
-//     return {
-//       form: this.$inertia.form({
-//         name: '',
-//         email: '',
-//         subject: '',
-//         content: '',
-//       }),
-//     };
-//   },
-//   methods: {
-//     submit() {
-//       this.form.post(this.route('contact.send'), {
-//         onFinish: () => this.form.reset(),
-//       });
-//     },
-//   },
-// })
-const form = {
+<script setup lang="ts">
+import {fetch} from "~/composables/api";
+
+const form = ref({
   name: '',
   email: '',
   subject: '',
   content: '',
-  errors: {},
-}
+});
+const errors = ref({});
+const sending = ref(false);
+const recentlySuccessful = ref(false);
 
-function submit() {
-  this.form.post(this.route('contact.send'), {
-    onFinish: () => this.form.reset(),
-  });
+const submit = async () => {
+  if (sending.value) {
+    return;
+  }
+  sending.value = true;
+  errors.value = {}
+  await fetch('/contact', {
+    method: 'POST',
+    body: { ...form.value },
+  }).then(() => {
+    recentlySuccessful.value = true;
+    Object.keys(form.value).forEach((key) => { form.value[key] = ''})
+  }).catch(reason => {
+    errors.value = reason.data.errors
+  })
+  sending.value = false;
 }
 </script>
