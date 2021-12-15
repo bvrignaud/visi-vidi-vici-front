@@ -23,20 +23,12 @@
 </template>
 
 <script>
-    // import { defineComponent } from 'vue'
-    // import JetSectionTitle from './SectionTitle.vue'
-
-    export default defineComponent({
-        emits: ['submitted'],
-        //
-        // components: {
-        //     JetSectionTitle,
-        // },
-
-        computed: {
-            hasActions() {
-                return !! this.$slots.actions
-            }
-        }
-    })
+  export default defineComponent({
+    emits: ['submitted'],
+    computed: {
+      hasActions() {
+        return !! this.$slots.actions
+      }
+    }
+  })
 </script>
