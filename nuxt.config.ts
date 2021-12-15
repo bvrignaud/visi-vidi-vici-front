@@ -9,4 +9,7 @@ export default defineNuxtConfig({
       postcssOptions: require('./postcss.config.js'),
     },
   },
+  publicRuntimeConfig: {
+    apiUrl: process.env.API_URL,
+  }
 })
