@@ -24,7 +24,7 @@
 
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <JetstreamNavLink v-for="navLink in navLinks" :to="navLink.route" :active="$route.name === navLink.route">
+                <JetstreamNavLink v-for="navLink in navLinks" :to="navLink.route">
                   {{ navLink.label }}
                 </JetstreamNavLink>
 <!--                <template v-if="! $page.props.user">-->
