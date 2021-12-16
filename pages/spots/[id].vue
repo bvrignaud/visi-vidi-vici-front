@@ -94,7 +94,6 @@
 </style>
 
 <script setup lang="ts">
-  import {useFetch} from "#app";
   import {useRoute} from "vue-router";
   import dayjs from "dayjs";
   const route = useRoute();
