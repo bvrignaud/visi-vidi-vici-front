@@ -272,6 +272,11 @@
   dependencies:
     mime "^3.0.0"
 
+"@fontsource/nunito@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/nunito/-/nunito-4.5.1.tgz#d5399e3d2d991196ae53b25a4845c75e8a9905b4"
+  integrity sha512-24hhHYsv0zZ1+52uZ7lYvj3THwIhOcM4dJWwVLQMXDGnu6A/40BNzcu2C/kGktnjdmtQhPAV9r/VzCDpC/uUwg==
+
 "@mapbox/node-pre-gyp@^1.0.5":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@mapbox/node-pre-gyp/-/node-pre-gyp-1.0.7.tgz#a26919cac6595662703330d1820a0ca206f45521"
