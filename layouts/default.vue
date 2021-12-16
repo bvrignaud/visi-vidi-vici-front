@@ -187,7 +187,7 @@ export default {
         },
         {
           label: 'Contact',
-          route: 'contact',
+          route: '/contact',
         },
       ],
     }
