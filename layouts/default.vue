@@ -103,9 +103,9 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
           <div class="pt-2 pb-3 space-y-1">
-<!--            <JetstreamResponsiveNavLink v-for="navLink in navLinks" :to="navLink.route" :active="$route.name === navLink.route">-->
-<!--              {{ navLink.label }}-->
-<!--            </JetstreamResponsiveNavLink>-->
+            <JetstreamResponsiveNavLink v-for="navLink in navLinks" :href="navLink.route">
+              {{ navLink.label }}
+            </JetstreamResponsiveNavLink>
 <!--            <template v-if="! $page.props.user">-->
 <!--&lt;!&ndash;              <jet-responsive-nav-link :href="route('login')" :active="route().current('login')">&ndash;&gt;-->
 <!--&lt;!&ndash;                Connexion&ndash;&gt;-->
