@@ -75,6 +75,12 @@
                 </div>
               </td>
             </tr>
+            <tr>
+              <th>Sun</th>
+              <td v-for="(forecast, date) in data.forecasts" :class="{'actual-day' : date === today}">
+                {{ forecast.sun.sunrise }}<br>{{ forecast.sun.sunset }}
+              </td>
+            </tr>
             </tbody>
           </table>
         </div>
