@@ -104,7 +104,8 @@
   import dayjs from "dayjs";
   const route = useRoute();
   const today = dayjs().format('YYYY-MM-DD');
-  const { data } = await useFetch(`http://127.0.0.1:8000/api/spots/${route.params.id}/forecast`);
+  const { apiUrl } = useRuntimeConfig();
+  const { data } = await useFetch(`${apiUrl}/spots/${route.params.id}/forecast`);
 </script>
 
 <script lang="ts">
