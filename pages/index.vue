@@ -54,7 +54,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-const { data: spots }: { data:any} = await useFetch('/api/spots')
+import {fetch} from "~/composables/api";
+
+const spots = fetch('/spots')
 
 function markers() {
   return this.spots.map(spot => {
