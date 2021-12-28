@@ -3,7 +3,6 @@ import { defineNuxtConfig } from 'nuxt3'
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   css: [
-      'leaflet/dist/leaflet.css',
       '@/assets/scss/app.scss',
       '@fontsource/nunito/400.css',
       '@fontsource/nunito/600.css',

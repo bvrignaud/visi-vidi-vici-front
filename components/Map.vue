@@ -18,7 +18,7 @@
 </template>
 
 <script>
-// import "leaflet/dist/leaflet.css"
+import "leaflet/dist/leaflet.css"
 import {LMap, LMarker, LTileLayer} from "@vue-leaflet/vue-leaflet";
 export default {
   components: {
