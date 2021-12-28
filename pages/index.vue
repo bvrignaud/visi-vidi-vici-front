@@ -55,8 +55,12 @@ export default {
 
 <script setup lang="ts">
 import {fetch} from "~/composables/api";
+import {useAsyncData} from "#app";
 
-const spots = fetch('/spots')
+const { data: spots } = useAsyncData(
+    '/spots',
+    () => fetch('/spots')
+)
 
 function markers() {
   return this.spots.map(spot => {
