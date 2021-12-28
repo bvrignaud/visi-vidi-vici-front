@@ -168,6 +168,7 @@
 </template>
 
 <script>
+import "@fontsource/nunito/400.css"
 import Footer from "./partials/Footer";
 
 export default {
