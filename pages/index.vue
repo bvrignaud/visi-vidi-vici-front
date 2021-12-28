@@ -37,9 +37,9 @@
 <!--          </NuxtLink>-->
         </div>
 
-<!--        <div v-if="spots.length" class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 mt-5">-->
-<!--          <Map :markers="markers()" :link-on-marker="true" />-->
-<!--        </div>-->
+        <div v-if="spots.length" class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 mt-5">
+          <Map :markers="markers()" :link-on-marker="true" />
+        </div>
 
       </div>
     </div>
