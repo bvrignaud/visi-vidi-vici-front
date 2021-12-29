@@ -37,9 +37,9 @@
 <!--          </NuxtLink>-->
         </div>
 
-        <div v-if="spots.length" class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 mt-5">
-          <Map :markers="markers()" :link-on-marker="true" />
-        </div>
+<!--        <div v-if="spots.length" class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 mt-5">-->
+<!--          <Map :markers="markers()" :link-on-marker="true" />-->
+<!--        </div>-->
 
       </div>
     </div>
@@ -62,13 +62,13 @@ const { data: spots } = useAsyncData(
     () => fetch('/spots')
 )
 
-function markers() {
-  return this.spots.map(spot => {
-    return {
-      id: spot.id,
-      coordinates: [spot.lat, spot.lng],
-      options: {title: spot.name},
-    };
-  });
-}
+// function markers() {
+//   return this.spots.map(spot => {
+//     return {
+//       id: spot.id,
+//       coordinates: [spot.lat, spot.lng],
+//       options: {title: spot.name},
+//     };
+//   });
+// }
 </script>

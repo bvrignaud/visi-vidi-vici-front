@@ -85,9 +85,9 @@
           </table>
         </div>
 
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 mt-5">
-          <Map :markers="markers()" :link-on-marker="false" />
-        </div>
+<!--        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 mt-5">-->
+<!--          <Map :markers="markers()" :link-on-marker="false" />-->
+<!--        </div>-->
       </div>
     </div>
   </NuxtLayout>
@@ -130,13 +130,13 @@ export default {
       }
       return `rgb(${R},${G},${B})`;
     },
-    markers() {
-      return [{
-        id: this.data.spot.id,
-        coordinates: [+this.data.spot.lat, +this.data.spot.lng],
-        options: {title: this.data.spot.name},
-      }];
-    },
+    // markers() {
+    //   return [{
+    //     id: this.data.spot.id,
+    //     coordinates: [+this.data.spot.lat, +this.data.spot.lng],
+    //     options: {title: this.data.spot.name},
+    //   }];
+    // },
   }
 }
 </script>
