@@ -8,7 +8,7 @@
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2 pt-0">
           <h3>Spots</h3>
-          <table>
+          <table v-if="spots">
             <thead>
             <tr>
               <th>Nom</th>
@@ -32,6 +32,9 @@
             </tr>
             </tbody>
           </table>
+          <div v-else class="flex items-center justify-center">
+            <Spinner />
+          </div>
 <!--          <NuxtLink v-if="$page.props.user" :to="route('spots.create')">-->
 <!--            <Button>Ajouter un nouveau Spot</Button>-->
 <!--          </NuxtLink>-->
@@ -58,6 +61,7 @@ export default {
 <script setup lang="ts">
 import {fetch} from "~/composables/api";
 import {useLazyAsyncData} from "#app";
+import Spinner from "~/components/Spinner.vue";
 
 const { data: spots } = useLazyAsyncData(
     '/spots',
