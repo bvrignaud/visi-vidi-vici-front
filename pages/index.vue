@@ -48,6 +48,8 @@
 
 
 <script lang="ts">
+import {fetch} from "~/composables/api";
+import {useAsyncData} from "#app";
 export default {
   layout: false,
 };
@@ -55,9 +57,9 @@ export default {
 
 <script setup lang="ts">
 import {fetch} from "~/composables/api";
-import {useAsyncData} from "#app";
+import {useLazyAsyncData} from "#app";
 
-const { data: spots } = useAsyncData(
+const { data: spots } = useLazyAsyncData(
     '/spots',
     () => fetch('/spots')
 )
